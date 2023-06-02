@@ -9,6 +9,7 @@ import com.example.laboratorio05.data.model.MovieWithActor
 
 @Dao
 interface MovieDao {
+
     @Query("SELECT * FROM movie_table")
     suspend fun getAllMovies(): List<MovieModel>
 
@@ -17,5 +18,5 @@ interface MovieDao {
     suspend fun insertMovie(movie: MovieModel)
 
     @Query("SELECT * FROM movie_table WHERE movieId = :movieId")
-    suspend fun getMovieWithActorById(movieId: Int): MovieWithActor?
+    suspend fun getMovieWithActorsById(movieId: Int): MovieWithActor?
 }

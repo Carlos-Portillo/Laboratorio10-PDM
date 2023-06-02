@@ -60,7 +60,6 @@ class MovieFragment : Fragment() {
         CoroutineScope(lifecycleScope.coroutineContext).launch {
             val movieWithActor = movieViewModel.getMovieWithActorById(movieId.value!!)
 
-
             val actors = movieWithActor?.actors
             adapter.setData(actors!!)
 

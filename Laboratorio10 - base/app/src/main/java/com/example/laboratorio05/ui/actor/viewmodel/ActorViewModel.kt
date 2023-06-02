@@ -8,26 +8,50 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.laboratorio05.MovieReviewerApplication
 import com.example.laboratorio05.data.model.ActorModel
+import com.example.laboratorio05.data.model.MovieModel
 import com.example.laboratorio05.repositories.ActorRepository
+import com.example.laboratorio05.ui.movie.viewmodel.MovieViewModel
 import kotlinx.coroutines.launch
 
 class ActorViewModel(private val repository: ActorRepository) : ViewModel() {
+    var id = MutableLiveData(0)
     var name = MutableLiveData("")
     var status = MutableLiveData("")
 
-    suspend fun getAllActors() = repository.getAllActos()
+    suspend fun getAllActors() = repository.getActors()
 
-    private fun addActor(actor: ActorModel) {
+    fun addActor(actor: ActorModel) {
         viewModelScope.launch {
-            repository.insertActor(actor)
+            repository.addActors(actor)
         }
     }
 
     fun createActor() {
-        val actor = ActorModel(name = name.value.toString())
+        if (!validateData()) {
+            status.value = ActorViewModel.WRONG_INFORMATION
+            return
+        }
+
+        val actor = ActorModel(
+            name = name.value!!
+        )
 
         addActor(actor)
-        status.value = ACTOR_CREATED
+        clearData()
+
+        status.value = ActorViewModel.ACTOR_CREATED
+    }
+
+    private fun validateData(): Boolean {
+        when {
+            name.value.isNullOrEmpty() -> return false
+        }
+        return true
+    }
+
+    fun clearData() {
+        id.value = 0
+        name.value = ""
     }
 
     fun clearStatus() {

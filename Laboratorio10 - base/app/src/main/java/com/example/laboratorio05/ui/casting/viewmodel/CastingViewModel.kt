@@ -22,7 +22,6 @@ class CastingViewModel(private val repository: CastRepository): ViewModel() {
         movieId.value = movie.movieId.toString()
     }
 
-
     fun selectActor(actor: ActorModel) {
         actorId.value = actor.actorId.toString()
     }

@@ -20,14 +20,13 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     var status = MutableLiveData("")
 
 
-
     suspend fun getMovies() = repository.getMovies()
 
     suspend fun getMovieWithActorById(movieId: Int) = repository.getMoviesWithActors(movieId)
 
     private fun addMovies(movie: MovieModel) {
         viewModelScope.launch {
-            repository.addMovies(movie)
+            repository.addMovie(movie)
         }
     }
 

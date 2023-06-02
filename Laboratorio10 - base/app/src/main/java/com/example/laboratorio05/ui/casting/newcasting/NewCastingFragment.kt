@@ -61,7 +61,6 @@ class NewCastingFragment : Fragment() {
     }
 
     private suspend fun getMoviesAndLaunchSpinner() {
-
         setMoviesSpinner(moviesViewModel.getMovies())
     }
 
@@ -86,7 +85,6 @@ class NewCastingFragment : Fragment() {
         setActorsSpinner(actorsViewModel.getAllActors())
     }
 
-
     private fun setActorsSpinner(actorList: List<ActorModel>) {
         val actorsAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, actorList.map { it.name })
         binding.actorsSpinner.adapter = actorsAdapter
@@ -103,7 +101,6 @@ class NewCastingFragment : Fragment() {
             }
         }
     }
-
 
     private fun observeStatus() {
         castingViewModel.status.observe(viewLifecycleOwner) { status ->

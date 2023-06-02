@@ -11,5 +11,6 @@ data class MovieWithActor(
         entityColumn = "actorId",
         associateBy = Junction(CastModel::class)
     )
-    val actors: List<ActorModel >
+
+    val actors: List<ActorModel>
 )
